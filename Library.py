@@ -10,10 +10,13 @@ def addBook(args):
     bookshelf.add(book)
 
 def removeBook(args):
-    pass
+    if(args.all):
+        print "all books"
+    elif(args.title):
+        print "remove book with title"
 
 def readBook(args):
-    pass
+    print "Read book with title {}".format(args.title)
 
 def showBooks(args):
     pass
@@ -24,7 +27,7 @@ def bar(args):
 
 def main():
 
-    parser = argparse.ArgumentParser(prog='mylib.py')
+    parser = argparse.ArgumentParser(description="Command line utility to add/remove/list/update books in a virtual library.")
 
     subparsers = parser.add_subparsers(help='subcommand help')
 
@@ -39,11 +42,12 @@ def main():
     r_group = parser_remove.add_mutually_exclusive_group(required=True)
     r_group.add_argument('-all', '-a', help='Remove all books', action='store_true')
     r_group.add_argument('-title', '-t', help='Remove specific book with title')
-    parser_remove.set_defaults(func=bar) ## this will print 'hello' and the -title argument
+    parser_remove.set_defaults(func=removeBook) ## this will print 'hello' and the -title argument
 
     ## Read book
     parser_readBook = subparsers.add_parser('read', help='Read book with given title')
     parser_readBook.add_argument('title', help='Title of book to read')
+    parser_readBook.set_defaults(func=readBook)
 
     ## Show book(s)
     parser_show = subparsers.add_parser('show', help='Show list of books in library')
