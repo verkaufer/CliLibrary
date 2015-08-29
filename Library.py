@@ -16,14 +16,10 @@ def removeBook(args):
         print "remove book with title"
 
 def readBook(args):
-    print "Read book with title {}".format(args.title)
+    bookshelf.read(args.title)
 
 def showBooks(args):
     pass
-
-def bar(args):
-	print 'hello'
-	print args.title
 
 def main():
 
